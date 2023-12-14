@@ -1,18 +1,12 @@
-const quote = document.getElementById("quote")
-const author = document.getElementById("author")
+let imgBox = document.getElementById("imgBox");
+let qrImage = document.getElementById("qrImage");
+let qrText = document.getElementById("qrText");
 
-const api_url = "https://api.quotable.io/random";
 
-async function getQuote(url){
-    const response  = await fetch(url);
-    var data = await response.json();
-    console.log(data);
-    quote.innerHTML = data.content;
-    author.innerHTML = data.author;
-}
+function generateQR() {
+    if(qrText.value.length > 0) {
+        qrImage.src = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" + qrText.value;
+        imgBox.classList.add("show-img");
+    }
 
-getQuote(api_url);
-
-function tweet() {
-    window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML, "Tweet Window", "width=600, height=300");
 }
